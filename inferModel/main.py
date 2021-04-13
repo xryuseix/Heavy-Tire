@@ -35,7 +35,8 @@ trainX_tf, testX_tf, trainY_tf, testY_tf = train_test_split(tfidfFeature, df.Lab
 lr_i32 = model.logisticRegression(trainX_i32, testX_i32, trainY_i32, testY_i32)
 model.evaluation(lr_i32, trainX_i32, testX_i32, trainY_i32, testY_i32, "LogisticRegression-count")
 
-## TfidfVectorizerで学習
+## TfidfVectorizerで学習(微妙に低い?)
+"""
 lr_tf = model.logisticRegression(trainX_tf, testX_tf, trainY_tf, testY_tf)
 model.evaluation(lr_tf, trainX_tf, testX_tf, trainY_tf, testY_tf, "LogisticRegression-tfidf")
-
+"""
