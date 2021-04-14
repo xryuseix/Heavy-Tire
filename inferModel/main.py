@@ -1,12 +1,24 @@
 import pandas as pd
 import numpy as np
+import joblib
 from sklearn.model_selection import train_test_split
 import processing as proc
-import model
+import learningModel as model
 
 # ファイル読み込み
 print("1. reading file...")
 df = pd.read_csv("../Phishing/phishing_site_urls.csv")
+
+# 重複削除
+df = df.drop_duplicates()
+
+"""print(df.describe())
+                        URL   Label
+count                507196  507196
+unique               507195       2
+top     tommyhumphreys.com/    good
+freq                      2  392897
+"""
 
 # URLを英単語列でトークン化
 print("2. word tokenized...")
@@ -33,10 +45,15 @@ trainX_tf, testX_tf, trainY_tf, testY_tf = train_test_split(tfidfFeature, df.Lab
 # ロジスティック回帰で学習
 ## CountVectorizerで学習
 lr_i32 = model.logisticRegression(trainX_i32, testX_i32, trainY_i32, testY_i32)
-model.evaluation(lr_i32, trainX_i32, testX_i32, trainY_i32, testY_i32, "LogisticRegression-count")
+model.evaluation(
+    lr_i32, trainX_i32, testX_i32, trainY_i32, testY_i32, "LogisticRegression-count"
+)
 
 ## TfidfVectorizerで学習(微妙に低い?)
 """
 lr_tf = model.logisticRegression(trainX_tf, testX_tf, trainY_tf, testY_tf)
 model.evaluation(lr_tf, trainX_tf, testX_tf, trainY_tf, testY_tf, "LogisticRegression-tfidf")
 """
+
+joblib.dump(lr_i32, "phishing.pkl", compress=True)
+
