@@ -34,13 +34,19 @@ df["text_sent"] = df["text_tokenized"].map(
 bad_sites = df[df.Label == "bad"]
 good_sites = df[df.Label == "good"]
 
+print("4. vectirization...")
+
 # 英単語の文字列をintのベクトルに変換
 intFeature = proc.wordStr2IntVec(df.text_sent)
 trainX_i32, testX_i32, trainY_i32, testY_i32 = train_test_split(intFeature, df.Label)
 
 # 英単語の文字列をtfidfのベクトルに変換
-tfidfFeature = proc.wordStr2IntVec(df.text_sent)
+"""
+tfidfFeature = proc.wordStr2TfidfVec(df.text_sent)
 trainX_tf, testX_tf, trainY_tf, testY_tf = train_test_split(tfidfFeature, df.Label)
+"""
+
+print("5. learning...")
 
 # ロジスティック回帰で学習
 ## CountVectorizerで学習
