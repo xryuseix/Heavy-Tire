@@ -30,10 +30,6 @@ df["text_sent"] = df["text_tokenized"].map(
     lambda urlList: proc.englishNormalization(urlList)
 )
 
-# 普通のサイトとフィッシングサイトで分ける
-bad_sites = df[df.Label == "bad"]
-good_sites = df[df.Label == "good"]
-
 print("4. vectirization...")
 
 # 英単語の文字列をintのベクトルに変換

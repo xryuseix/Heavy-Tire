@@ -20,9 +20,10 @@ def englishNormalization(urlList: list):
 # --------- ここからはモデル次第で使う ---------#
 
 # 英単語の文字列をintのベクトルに変換
-def wordStr2IntVec(url: str):
+vocabulary = {}
+def wordStr2IntVec(urlDf):
     cv = CountVectorizer()
-    count = cv.fit_transform(url)
+    count = cv.fit_transform(urlDf)
     vocabularySave(cv.vocabulary_)
     return count
 

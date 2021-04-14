@@ -11,7 +11,10 @@ class wordStr2IntVec:
     # 英単語を数字に変換
     def convert(self, normalizedUrl: str):
         urlList = normalizedUrl.split(" ")
-        convertedList = [self.vocabulary[word] for word in urlList]
+        convertedList = [0] * len(self.vocabulary)
+        for word in urlList:
+            if word in self.vocabulary:
+                convertedList[self.vocabulary[word]] += 1
         return convertedList
 
 
@@ -19,18 +22,29 @@ def infer(url: str, w2iClass):
     clf = joblib.load("phishing.pkl")  # モデル読みこみ
     tokenizedUrl = proc.tokenize(url)  # トークン化
     normalizedUrl = proc.englishNormalization(tokenizedUrl)  # 正規化
-    print(w2iClass.convert(normalizedUrl))
-    return
-    feature = proc.wordStr2IntVec(pd.Series(normalizedUrl))  # ベクトル化
-    predictResult = clf.predict(feature)
+    feature = w2iClass.convert(normalizedUrl)
+    predictResult = clf.predict([feature])
     return predictResult
 
 
 if __name__ == "__main__":
     w2i = wordStr2IntVec()
     print("good:", infer("facebook.com/people/Desiree-Gordon/507399416", w2i))  # good
-    exit()
     print(
         "bad:", infer("dutchweb.gtphost.com/zimbra/exch/owa/uleth/index.html", w2i)
     )  # bad
+    print(
+        "bad:",
+        infer(
+            "9d345009-a-62cb3a1a-s-sites.googlegroups.com/site/stickamcomlogindo/login.html?amp\%3Battredirects=1&amp;attachauth=ANoY7cp-XSsmMBKPpKQvZiVxuuXfsdv2WcmvUeBVlqd-wj6bdc3iHYq5i11PmWp4Xsjb6atTOxDkMSfoyV6ZHbfGCxfhmMQurfGmfbNSUEYWheq-BZhSyaCCAR8LDOpliWjNIkanhEPTtt6U8zbycYD6u8lVo8vEsK0NszMk_hXJe2ivppyywrORJo9Nsu5LTZZpnxMsrh3rvEiD-gffbsd01hn88jj5hg\%3D\%3D&amp;attredirects=0",
+            w2i,
+        ),
+    )
+    print(
+        "good:",
+        infer(
+            "guitarcenter.com/Basslines-ASB-BO-4s-Blackouts-for-Bass---Neck-and-Bridge-Set-105486211-i1474993.gc",
+            w2i,
+        ),
+    )
 
