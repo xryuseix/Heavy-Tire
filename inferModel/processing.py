@@ -39,7 +39,7 @@ def vocabularySave(vocabulary):
                 return obj.tolist()
             else:
                 return super(MyEncoder, self).default(obj)
-    with open('vocabulary.json', 'w') as f:
+    with open('InferData/vocabulary.json', 'w') as f:
         json.dump(vocabulary, f, indent=4, cls = MyEncoder)
 
 # 英単語の文字列をtfidfのベクトルに変換

@@ -7,7 +7,7 @@ import learningModel as model
 
 # ファイル読み込み
 print("1. reading file...")
-df = pd.read_csv("../Phishing/phishing_site_urls.csv")
+df = pd.read_csv("PhishingDataset/phishing_site_urls.csv")
 
 # 重複削除
 df = df.drop_duplicates()
@@ -57,5 +57,5 @@ lr_tf = model.logisticRegression(trainX_tf, testX_tf, trainY_tf, testY_tf)
 model.evaluation(lr_tf, trainX_tf, testX_tf, trainY_tf, testY_tf, "LogisticRegression-tfidf")
 """
 
-joblib.dump(lr_i32, "phishing.pkl", compress=True)
+joblib.dump(lr_i32, "InferData/phishing.pkl", compress=True)
 

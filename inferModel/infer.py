@@ -5,7 +5,7 @@ import processing as proc
 # 英単語辞書管理クラス
 class wordStr2IntVec:
     def __init__(self):
-        with open("vocabulary.json") as f:
+        with open("InferData/vocabulary.json") as f:
             self.vocabulary = json.load(f)
 
     # 英単語を数字に変換
@@ -19,7 +19,7 @@ class wordStr2IntVec:
 
 
 def infer(url: str, w2iClass):
-    clf = joblib.load("phishing.pkl")  # モデル読みこみ
+    clf = joblib.load("InferData/phishing.pkl")  # モデル読みこみ
     tokenizedUrl = proc.tokenize(url)  # トークン化
     normalizedUrl = proc.englishNormalization(tokenizedUrl)  # 正規化
     feature = w2iClass.convert(normalizedUrl)
