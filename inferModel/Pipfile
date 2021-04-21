@@ -1,0 +1,17 @@
+[[source]]
+url = "https://github.com/xryuseix/secure-system-dev"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+joblib = "0.14.1"
+pandas = "0.25.3"
+scikit-learn = "0.22.1"
+nltk = "3.6.1"
+numpy = "1.18.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6.4"
