@@ -1,4 +1,4 @@
-![Python](https://img.shields.io/github/pipenv/locked/python-version/xryuseix/Heavy-Tire)
+![Python](https://img.shields.io/github/pipenv/locked/python-version/xryuseix/Heavy-Tire) [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 # 「Heavy-Tire」 - フィッシングサイト検知システム
 
@@ -28,6 +28,6 @@ https://heavy-tire.herokuapp.com/?url=twitter.com
 
 Bad
 
-```sj
+```sh
 https://heavy-tire.herokuapp.com/?url=utchweb.gtphost.com/zimbra/exch/owa/uleth/index.html
 ```
