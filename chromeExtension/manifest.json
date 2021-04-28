@@ -1,0 +1,16 @@
+{
+  "name": "Heavy-Tire",
+  "version": "1.0",
+
+  "description": "フィッシングサイト検知システム",
+
+  "browser_action": {
+    "default_title": "Heavy-Tire",
+    "default_popup": "index.html"
+  },
+
+  "permissions": ["activeTab"],
+  "author": "xryuseix",
+
+  "manifest_version": 2
+}
