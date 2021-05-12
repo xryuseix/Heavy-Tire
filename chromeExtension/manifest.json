@@ -7,8 +7,12 @@
 
   "browser_action": {
     "default_title": "Heavy-Tire",
-    "default_popup": "index.html",
-    "default_icon": "icon/icon.png"
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "icon/icon16.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
   },
   "content_scripts": [
     {
