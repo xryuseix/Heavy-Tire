@@ -1,3 +1,4 @@
+// ポップアップ用スクリプト
 let Data = { Title: "", URL: "" }; // とりま格納する変数
 
 chrome.tabs.getSelected((tab) => {
