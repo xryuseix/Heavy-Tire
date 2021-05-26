@@ -25,11 +25,23 @@ fetch("https://heavy-tire.herokuapp.com/?url=twitter.com")
 
 // APIから取得したデータを出力
 function putResponseData(jsonObj) {
-  // TODO: Errorの時の処理入れる
   if ("result" in jsonObj) {
-    heavyTire.textContent = `{"result": ${jsonObj.result}}`;
-  }else{
-    console.log("[Heavy-Tire] ERROR: failed to fatch.")
+    if (jsonObj.result) {
+      // フィッシングサイト
+      heavyTire.classList.add("phishing");
+      heavyTire.style.backgroundColor = "#ffff66";
+      heavyTire.textContent = "[Heavy-Tire] 閲覧しているページはフィッシングサイトである可能性があります。";
+      heavyTire.style.textAlign = "center";
+    } else {
+      // 安全なサイト
+      heavyTire.classList.add("safe");
+      heavyTire.style.backgroundColor = "#00CC00";
+      heavyTire.textContent = "[Heavy-Tire] 閲覧しているページは安全です。";
+      heavyTire.style.textAlign = "center";
+    }
+  } else {
+    // Error
+    console.log("[Heavy-Tire] ERROR: failed to fatch.");
   }
 }
 
