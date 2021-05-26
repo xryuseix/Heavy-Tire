@@ -11,15 +11,40 @@ chrome.tabs.getSelected((tab) => {
 
 window.addEventListener("load", () => {
   // 拡張機能アイコンがクリックされて拡張機能ポップアップページが読み込まれたとき
-  const txtBox = document.querySelector("input");
+  const txtBox = document.getElementById("status");
   document.querySelector("button.ttl").addEventListener("click", () => {
     // クリックされたときにテキストボックスに出力
     txtBox.value = Data.Title;
-  });
-  document.querySelector("button.url").addEventListener("click", () => {
-    txtBox.value = Data.URL;
   });
   document.querySelector("button.bmark").addEventListener("click", () => {
     txtBox.value = "AAAAAAAA";
   });
 });
+
+// 設置を保存
+function save_options() {
+  var displaySafe = document.getElementById("settings").checked;
+  chrome.storage.sync.set(
+    {
+      displaySafe: displaySafe,
+    },
+    function () {
+      var status = document.getElementById("status");
+      status.textContent = `保存されました : ${displaySafe}`;
+    }
+  );
+}
+
+// 設置を初期化
+function restore_options() {
+  chrome.storage.sync.get(
+    {
+      displaySafe: true,
+    },
+    function (items) {
+      document.getElementById("settings").checked = items.displaySafe;
+    }
+  );
+}
+document.addEventListener("DOMContentLoaded", restore_options);
+document.getElementById("save").addEventListener("click", save_options);

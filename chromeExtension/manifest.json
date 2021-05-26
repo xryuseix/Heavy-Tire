@@ -20,5 +20,5 @@
       "matches": ["<all_urls>"]
     }
   ],
-  "permissions": ["activeTab"]
+  "permissions": ["storage"]
 }

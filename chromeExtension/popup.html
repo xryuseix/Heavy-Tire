@@ -5,14 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="popup.css" />
-    <script src="popup.js"></script>
   </head>
   <body>
     <h1>Heavy-Tire</h1>
     <button class="ttl">Get Title</button>
-    <button class="url">Get URL</button>
     <button class="bmark">フィッシング判定</button>
-    <input type="text" readonly id="result" />
+    <br />
+    <input type="checkbox" id="settings" />
+    安全なページでは判定結果を非表示
+    <br />
+    <div id="status"></div>
+    <button id="save">保存</button>
     <p>
       This Extension is
       <a href="https://github.com/xryuseix/Heavy-Tire" target="_blank"
@@ -20,5 +23,7 @@
       </a>
       .
     </p>
+    
+    <script src="popup.js"></script>
   </body>
 </html>
