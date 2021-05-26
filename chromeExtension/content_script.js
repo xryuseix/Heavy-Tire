@@ -1,18 +1,17 @@
-// ページ操作用スクリプト
-let Data = { Title: "サンプルタイトル", URL: "http://www.sample.com" }; // あとで入れる
-
 // prependChildを定義
 Element.prototype.prependChild = function (el) {
   this.insertBefore(el, this.firstChild);
 };
 
-var bodyElement = document.querySelector("body");
-var heavyTire = document.createElement("div");
+const bodyElement = document.querySelector("body");
+const heavyTire = document.createElement("div");
 heavyTire.className = "heavy-tire";
+// TODO: heightを指定
 
 // ここからコンテンツを作る
 
-fetch("https://heavy-tire.herokuapp.com/?url=twitter.com")
+fetch(`https://heavy-tire.herokuapp.com/?url=${document.domain}`)
+  // fetch("https://heavy-tire.herokuapp.com/?url=utchweb.gtphost.com/zimbra/exch/owa/uleth/index.html")
   .then((response) => {
     return response.json();
   })
@@ -30,7 +29,8 @@ function putResponseData(jsonObj) {
       // フィッシングサイト
       heavyTire.classList.add("phishing");
       heavyTire.style.backgroundColor = "#ffff66";
-      heavyTire.textContent = "[Heavy-Tire] 閲覧しているページはフィッシングサイトである可能性があります。";
+      heavyTire.textContent =
+        "[Heavy-Tire] 閲覧しているページはフィッシングサイトである可能性があります。";
       heavyTire.style.textAlign = "center";
     } else {
       // 安全なサイト
