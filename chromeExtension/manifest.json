@@ -7,7 +7,7 @@
 
   "browser_action": {
     "default_title": "Heavy-Tire",
-    "default_popup": "index.html"
+    "default_popup": "popup.html"
   },
   "icons": {
     "16": "icon/icon16.png",
