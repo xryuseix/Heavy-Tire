@@ -18,7 +18,7 @@ function save_options() {
     },
     function () {
       var status = document.getElementById("status");
-      status.textContent = `保存されました : ${isSafeDisplay}`;
+      status.textContent = `保存されました!`;
     }
   );
 }
