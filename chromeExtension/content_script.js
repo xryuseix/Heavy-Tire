@@ -7,32 +7,33 @@ function setHeavyTireElement() {
   const bodyElement = document.querySelector("body");
   const heavyTire = document.createElement("div");
   heavyTire.className = "heavy-tire";
+  bodyElement.prependChild(heavyTire);
   // TODO: heightを指定
   return heavyTire;
 }
 
 // 設定の取得
-function getSettings() {
-  const settings = chrome.storage.sync.get(function (settings) {
-    if (Object.keys(settings).length === 0) {
-      settings.isSafeDisplay = true;
-    }
-    console.log(`1: ${settings}`);
-    return settings;
+async function getSettings() {
+  const settings = new Promise(function (resolve, reject) {
+    chrome.storage.sync.get(function (settings) {
+      if (Object.keys(settings).length === 0) {
+        settings.isSafeDisplay = true;
+      }
+      resolve(settings);
+    });
   });
-  console.log(`2: ${settings}`);
   return settings;
 }
 
 // フィシング判定結果を取得
-function fetchPhisingAPI() {
+function fetchPhisingAPI(heavyTire, settings) {
   fetch(`https://heavy-tire.herokuapp.com/?url=${document.domain}`)
     // fetch("https://heavy-tire.herokuapp.com/?url=utchweb.gtphost.com/zimbra/exch/owa/uleth/index.html")
     .then((response) => {
       return response.json();
     })
     .then((result) => {
-      putResponseData(result);
+      putResponseData(heavyTire, settings, result);
     })
     .catch((e) => {
       console.log(e);
@@ -40,10 +41,9 @@ function fetchPhisingAPI() {
 }
 
 // APIから取得したデータを出力
-function putResponseData(jsonObj) {
-  if ("result" in jsonObj) {
-    console.log(`3: ${settings}`);
-    if (jsonObj.result) {
+function putResponseData(heavyTire, settings, fetchObj) {
+  if ("result" in fetchObj) {
+    if (fetchObj.result) {
       // フィッシングサイト
       heavyTire.classList.add("phishing");
       heavyTire.style.backgroundColor = "#ffff66";
@@ -63,8 +63,10 @@ function putResponseData(jsonObj) {
   }
 }
 
-// ここまで
+async function main() {
+  const heavyTire = setHeavyTireElement();
+  const settings = await getSettings();
+  fetchPhisingAPI(heavyTire, settings);
+}
 
-const heavyTire = setHeavyTireElement();
-const settings = getSettings();
-bodyElement.prependChild(heavyTire);
+main();

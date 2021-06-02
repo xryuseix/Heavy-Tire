@@ -9,28 +9,16 @@ chrome.tabs.getSelected((tab) => {
   console.log(`URL: ${Data.URL}`);
 });
 
-window.addEventListener("load", () => {
-  // 拡張機能アイコンがクリックされて拡張機能ポップアップページが読み込まれたとき
-  const txtBox = document.getElementById("status");
-  document.querySelector("button.ttl").addEventListener("click", () => {
-    // クリックされたときにテキストボックスに出力
-    txtBox.value = Data.Title;
-  });
-  document.querySelector("button.bmark").addEventListener("click", () => {
-    txtBox.value = "AAAAAAAA";
-  });
-});
-
 // 設置を保存
 function save_options() {
-  var displaySafe = document.getElementById("settings").checked;
+  var isSafeDisplay = document.getElementById("settings").checked;
   chrome.storage.sync.set(
     {
-      displaySafe: displaySafe,
+      "isSafeDisplay": isSafeDisplay,
     },
     function () {
       var status = document.getElementById("status");
-      status.textContent = `保存されました : ${displaySafe}`;
+      status.textContent = `保存されました : ${isSafeDisplay}`;
     }
   );
 }
@@ -39,10 +27,10 @@ function save_options() {
 function restore_options() {
   chrome.storage.sync.get(
     {
-      displaySafe: true,
+      "isSafeDisplay": true,
     },
     function (items) {
-      document.getElementById("settings").checked = items.displaySafe;
+      document.getElementById("settings").checked = items.isSafeDisplay;
     }
   );
 }
