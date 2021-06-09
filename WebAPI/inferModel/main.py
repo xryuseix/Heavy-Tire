@@ -37,25 +37,26 @@ intFeature = proc.wordStr2IntVec(df.text_sent)
 trainX_i32, testX_i32, trainY_i32, testY_i32 = train_test_split(intFeature, df.Label)
 
 # 英単語の文字列をtfidfのベクトルに変換
-"""
 tfidfFeature = proc.wordStr2TfidfVec(df.text_sent)
 trainX_tf, testX_tf, trainY_tf, testY_tf = train_test_split(tfidfFeature, df.Label)
-"""
+
 
 print("5. learning...")
 
-# ロジスティック回帰で学習
-## CountVectorizerで学習
-lr_i32 = model.logisticRegression(trainX_i32, testX_i32, trainY_i32, testY_i32)
-model.evaluation(
-    lr_i32, trainX_i32, testX_i32, trainY_i32, testY_i32, "LogisticRegression-count"
-)
+model_type = 1
 
-## TfidfVectorizerで学習(微妙に低い?)
-"""
-lr_tf = model.logisticRegression(trainX_tf, testX_tf, trainY_tf, testY_tf)
-model.evaluation(lr_tf, trainX_tf, testX_tf, trainY_tf, testY_tf, "LogisticRegression-tfidf")
-"""
+if model_type == 0:
+    # ロジスティック回帰で学習
+    ## CountVectorizerで学習
+    lr_i32 = model.logisticRegression(trainX_i32, testX_i32, trainY_i32, testY_i32)
+    model.evaluation(
+        lr_i32, trainX_i32, testX_i32, trainY_i32, testY_i32, "LogisticRegression-count"
+    )
+    joblib.dump(lr_i32, "InferData/phishing.pkl", compress=True)
 
-joblib.dump(lr_i32, "InferData/phishing.pkl", compress=True)
-
+elif model_type == 1:
+    # SVCで学習
+    ## TfidfVectorizerで学習
+    svc = model.linearSVC(trainX_tf, testX_tf, trainY_tf, testY_tf)
+    model.evaluation(svc, trainX_tf, testX_tf, trainY_tf, testY_tf, "LinearSVC-tfidf")
+    joblib.dump(svc, "InferData/phishing.pkl", compress=True)
