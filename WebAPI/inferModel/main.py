@@ -4,6 +4,8 @@ import joblib
 from sklearn.model_selection import train_test_split
 import processing as proc
 import learningModel as model
+from sklearn.svm import LinearSVC, SVC
+from sklearn.naive_bayes import GaussianNB
 
 # ファイル読み込み
 print("1. reading file...")
@@ -48,7 +50,7 @@ model_type = 1
 if model_type == 0:
     # ロジスティック回帰で学習
     ## CountVectorizerで学習
-    lr_i32 = model.logisticRegression(trainX_i32, testX_i32, trainY_i32, testY_i32)
+    lr_i32 = model.logisticRegression(trainX_i32, trainY_i32)
     model.evaluation(
         lr_i32, trainX_i32, testX_i32, trainY_i32, testY_i32, "LogisticRegression-count"
     )
@@ -57,6 +59,13 @@ if model_type == 0:
 elif model_type == 1:
     # SVCで学習
     ## TfidfVectorizerで学習
-    svc = model.linearSVC(trainX_tf, testX_tf, trainY_tf, testY_tf)
+    svc = model.linearSVC(trainX_tf, trainY_tf)
     model.evaluation(svc, trainX_tf, testX_tf, trainY_tf, testY_tf, "LinearSVC-tfidf")
     joblib.dump(svc, "InferData/phishing.pkl", compress=True)
+
+elif model_type == 2:
+    # SVC
+    def param():
+    clf = model.svc(trainX_tf, trainY_tf)
+    model.evaluation(clf, trainX_tf, testX_tf, trainY_tf, testY_tf, "gridSearch")
+    joblib.dump(clf, "InferData/phishing.pkl", compress=True)

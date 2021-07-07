@@ -55,3 +55,26 @@ Testing Accuracy : 0.9732805463765487
    macro avg       0.97      0.95      0.96    126799
 weighted avg       0.97      0.97      0.97    126799
 ```
+
+* CNN
+
+```txt
+optimization finished, #iter = 173328
+obj = -27500.376756, rho = 0.782277
+nSV = 110348, nBSV = 18375
+Total nSV = 110348
+[LibSVM]
+=== CLASSIFICATION REPORT ===
+model : CNN
+Training Accuracy : 0.9960856683938096
+Testing Accuracy : 0.9694555950756709
+
+               precision    recall  f1-score   support
+
+         Bad       0.98      0.88      0.93     28538
+        Good       0.97      0.99      0.98     98261
+
+    accuracy                           0.97    126799
+   macro avg       0.97      0.94      0.95    126799
+weighted avg       0.97      0.97      0.97    126799
+```
