@@ -2,7 +2,11 @@
 
 # 「Heavy-Tire」 - フィッシングサイト検知システム
 
-## フィッシング検知 API
+<div align="center">
+  <img width="60%" src="./images/icon.png" alt="logo" />
+</div>
+
+## フィッシング判定 API
 
 フィッシングサイトかどうか判定します．
 
