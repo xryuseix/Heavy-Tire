@@ -1,6 +1,6 @@
 ![Python](https://img.shields.io/github/pipenv/locked/python-version/xryuseix/Heavy-Tire) ![Python](https://img.shields.io/badge/Python-v3.9.1-yellow?logo=python) [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
-# 「Heavy-Tire」 - フィッシングサイト検知システム
+# 「Heavy-Tire」 - フィッシングサイト判定システム
 
 <div align="center">
   <img width="60%" src="./images/icon.png" alt="logo" />
