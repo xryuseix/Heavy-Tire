@@ -14,7 +14,7 @@
 
 <div align="center">
   <img src="./images/chromeEX.png"/>
-</a>
+</div>
 
 ## フィッシング判定 API
 
